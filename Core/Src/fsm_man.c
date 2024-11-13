@@ -21,12 +21,13 @@ void fsm_man_run(){
 			if(timeRed < 99 && timeRed < 99 && timeGreen < 99){
 			   timeRed++;
 			   timeGreen++;
+			   count = timeRed;
 			   setTimer2(7000);
 			}
 		}
 		if(IsModeButtonPressed(2) == 1){
 			status = RED1_GREEN2;
-			count = 1;
+			UpdateBuffer(mode, count);
 			setTimer2(7000);
 			setTimer1(timeGreen*1000);
 		}
@@ -38,8 +39,13 @@ void fsm_man_run(){
 			status = INIT;
 			count = 1;
 			mode = 1;
-			setTimer3(250);
+//			setTimer3(250);
 		}
+		if(timer3_flag == 1){
+				if(index == 4) index = 0;
+				setTimer3(250);
+				Update7SEG(index++);
+			}
 		break;
 
 	case MAN_AMBER:
@@ -56,13 +62,20 @@ void fsm_man_run(){
 			if(timeRed < 99 && timeRed < 99 && timeGreen < 99){
 			   timeAmber++;
 			   timeRed++;
+			   count = timeRed;
 //			   timeGreen++;
 			   setTimer2(7000);
 			}
 		}
+		if(timer3_flag == 1){
+				if(index == 4) index = 0;
+				setTimer3(250);
+				Update7SEG(index++);
+			}
 		if(IsModeButtonPressed(2) == 1){
 			status = RED1_GREEN2;
-			count = 1;
+
+			UpdateBuffer(mode, count);
 			setTimer2(7000);
 			setTimer1(timeGreen*1000);
 		}
@@ -87,10 +100,16 @@ void fsm_man_run(){
 			if(timeRed < 99 && timeRed < 99 && timeGreen < 99){
 			   timeGreen++;
 			   timeRed++;
+			   count = timeRed;
 			   setTimer2(7000);
 //			   UpdateBuffer(mode, timeGreen);
 			}
 		}
+		if(timer3_flag == 1){
+				if(index == 4) index = 0;
+				setTimer3(250);
+				Update7SEG(index++);
+			}
 		if(timer2_flag == 1){
 			status = MAN_AMBER;
 			mode = 3;
@@ -98,7 +117,8 @@ void fsm_man_run(){
 		}
 		if(IsModeButtonPressed(2) == 1){
 			status = RED1_GREEN2;
-			count = 1;
+//			setTimer3(250);
+			UpdateBuffer(mode, count);
 			setTimer1(timeGreen*1000);
 			setTimer2(7000);
 		}
@@ -115,10 +135,10 @@ void fsm_man_run(){
 	default:
 		break;
 	}
-	if(timer3_flag == 1){
-		if(index == 4) index = 0;
-		setTimer3(250);
-		Update7SEG(index++);
-	}
+//	if(timer3_flag == 1){
+//		if(index == 4) index = 0;
+//		setTimer3(250);
+//		Update7SEG(index++);
+//	}
 }
 
