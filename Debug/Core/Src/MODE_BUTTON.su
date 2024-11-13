@@ -1,0 +1,4 @@
+MODE_BUTTON.c:16:5:Mode	16	static
+MODE_BUTTON.c:21:5:IsModeButtonPressed	4	static
+MODE_BUTTON.c:29:6:MODEProcess	4	static
+MODE_BUTTON.c:32:6:getKeyInput1	8	static
