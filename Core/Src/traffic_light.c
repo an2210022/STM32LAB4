@@ -36,8 +36,8 @@ void displayGREEN2(){
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 1);
 }
 void BlinkRED(){
+    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
 	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
-	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, 0);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, 0);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
@@ -54,6 +54,14 @@ void BlinkAMBER(){
 void BlinkGREEN(){
 	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_3);
 	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_6);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, 0);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, 0);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 0);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+}
+void OFF(){
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, 0);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 0);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, 0);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, 0);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 0);

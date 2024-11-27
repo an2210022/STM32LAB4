@@ -20,7 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include <button.h>
 #include "main.h"
-
+#include "scheduler.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -60,7 +60,14 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void ledtest1(void){
+	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, 0);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, 0);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 0);
+}
 /* USER CODE END 0 */
 
 /**
@@ -95,24 +102,29 @@ int main(void)
   /* USER CODE BEGIN 2 */
 //  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1 || GPIO_PIN_2 || GPIO_PIN_3 || GPIO_PIN_4
 //		  || GPIO_PIN_5 || GPIO_PIN_6, 0);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, 1);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 1);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 1);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 1);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, 1);
+//  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, 1);
+//  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 1);
+//  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 1);
+//  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 1);
+//  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1);
+//  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, 1);
+//  OFF();
   HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   status = INIT;
+//  SCH_Add_Task(BlinkRED1, 0, 500);
 //  mode = 1;
-
+//  SCH_Add_Task(ledtest1, 1000, 2000);
+//  SCH_Add_Task(LED7, 0, 250);
   while (1)
   {
 	  fsm_auto_run();
 	  fsm_man_run();
+	  SCH_Dispatch_Tasks();
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -258,8 +270,9 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback (TIM_HandleTypeDef * htim){
-	timerRun();
+//	timerRun();
 	getKeyInput1();
+	SCH_Update();
 }
 /* USER CODE END 4 */
 

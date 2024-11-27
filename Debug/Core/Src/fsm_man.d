@@ -25,7 +25,7 @@ Core/Src/fsm_man.o: ../Core/Src/fsm_man.c ../Core/Inc/fsm_man.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Core/Inc/traffic_light.h ../Core/Inc/led7_segment.h \
- ../Core/Inc/software_timer.h
+ ../Core/Inc/software_timer.h ../Core/Inc/scheduler.h
 
 ../Core/Inc/fsm_man.h:
 
@@ -88,3 +88,5 @@ Core/Src/fsm_man.o: ../Core/Src/fsm_man.c ../Core/Inc/fsm_man.h \
 ../Core/Inc/led7_segment.h:
 
 ../Core/Inc/software_timer.h:
+
+../Core/Inc/scheduler.h:

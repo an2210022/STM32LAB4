@@ -158,3 +158,16 @@ void UpdateBuffer(int m, int time){
 	led_buffer[2] = time/10;
 	led_buffer[3] = time%10;
 }
+
+void SEG0(void){
+	Update7SEG(0);
+}
+void SEG1(void){
+	Update7SEG(1);
+}
+void SEG2(void){
+	Update7SEG(2);
+}
+void SEG3(void){
+	Update7SEG(3);
+}

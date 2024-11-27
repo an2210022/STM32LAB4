@@ -10,135 +10,102 @@ void fsm_man_run(){
 	case MAN_RED:
 		UpdateBuffer(mode, timeRed);
 		if(IsModeButtonPressed(0) == 1){
-			status = MAN_AMBER;
+			SCH_Init();
+			SCH_Add_Task(LED7, 0, 250);
+			SCH_Add_Task(BlinkAMBER, 0, 500);
 			mode = 3;
 			UpdateBuffer(mode, TIME_AMBER);
-			setTimer3(250);
-			setTimer1(500);
-			setTimer2(7000);
+			SCH_Add_Task(ResetStatus, 7000, 0);
+			status = MAN_AMBER;
 		}
 		if(IsModeButtonPressed(1) == 1){
 			if(timeRed < 99 && timeRed < 99 && timeGreen < 99){
+			   SCH_Init();
 			   timeRed++;
 			   timeGreen++;
 			   count = timeRed;
-			   setTimer2(7000);
+			   UpdateBuffer(mode, timeGreen);
+			   SCH_Add_Task(LED7, 0, 250);
+			   SCH_Add_Task(BlinkRED, 0, 500);
+			   SCH_Add_Task(ResetStatus, 7000, 0);
 			}
 		}
 		if(IsModeButtonPressed(2) == 1){
+			SCH_Init();
 			status = RED1_GREEN2;
+			wait = 0;
+			count = timeRed;
 			UpdateBuffer(mode, count);
-			setTimer2(7000);
-			setTimer1(timeGreen*1000);
+			SCH_Add_Task(LED7, 0, 250);
 		}
-		if(timer1_flag == 1){
-			BlinkRED();
-			setTimer1(500);
-		}
-		if(timer2_flag == 1){
-			status = INIT;
-			count = 1;
-			mode = 1;
-//			setTimer3(250);
-		}
-		if(timer3_flag == 1){
-				if(index == 4) index = 0;
-				setTimer3(250);
-				Update7SEG(index++);
-			}
 		break;
 
 	case MAN_AMBER:
+//		SCH_Add_Task(BlinkAMBER, 0, 500);
 		UpdateBuffer(mode, timeAmber);
 		if(IsModeButtonPressed(0) == 1){
-			status = MAN_GREEN;
+			SCH_Init();
+			SCH_Add_Task(LED7, 0, 250);
+			SCH_Add_Task(BlinkGREEN, 0, 500);
 			mode = 4;
 			UpdateBuffer(mode, TIME_GREEN);
-			setTimer3(250);
-			setTimer1(500);
-			setTimer2(7000);
+			SCH_Add_Task(ResetStatus, 7000, 0);
+			status = MAN_GREEN;
 		}
 		if(IsModeButtonPressed(1) == 1){
 			if(timeRed < 99 && timeRed < 99 && timeGreen < 99){
+			   SCH_Init();
 			   timeAmber++;
 			   timeRed++;
 			   count = timeRed;
-//			   timeGreen++;
-			   setTimer2(7000);
+			   UpdateBuffer(mode, timeGreen);
+			   SCH_Add_Task(LED7, 0, 250);
+			   SCH_Add_Task(BlinkRED, 0, 500);
+   			   SCH_Add_Task(ResetStatus, 7000, 0);
 			}
 		}
-		if(timer3_flag == 1){
-				if(index == 4) index = 0;
-				setTimer3(250);
-				Update7SEG(index++);
-			}
 		if(IsModeButtonPressed(2) == 1){
+			SCH_Init();
 			status = RED1_GREEN2;
-
+			wait = 0;
+			count = timeRed;
 			UpdateBuffer(mode, count);
-			setTimer2(7000);
-			setTimer1(timeGreen*1000);
-		}
-		if(timer2_flag == 1){
-			status = MAN_RED;
-			setTimer2(7000);
-			mode = 2;
-		}
-		if(timer1_flag == 1){
-			BlinkAMBER();
-			setTimer1(500);
+			SCH_Add_Task(LED7, 0, 250);
 		}
 		break;
 
 	case MAN_GREEN:
 		UpdateBuffer(mode, timeGreen);
-		if(timer1_flag == 1){
-			BlinkGREEN();
-			setTimer1(500);
-		}
 		if(IsModeButtonPressed(1) == 1){
 			if(timeRed < 99 && timeRed < 99 && timeGreen < 99){
+			   SCH_Init();
 			   timeGreen++;
 			   timeRed++;
 			   count = timeRed;
-			   setTimer2(7000);
-//			   UpdateBuffer(mode, timeGreen);
+			   UpdateBuffer(mode, timeGreen);
+			   SCH_Add_Task(LED7, 0, 250);
+			   SCH_Add_Task(BlinkRED, 0, 500);
+			   SCH_Add_Task(ResetStatus, 7000, 0);
 			}
-		}
-		if(timer3_flag == 1){
-				if(index == 4) index = 0;
-				setTimer3(250);
-				Update7SEG(index++);
-			}
-		if(timer2_flag == 1){
-			status = MAN_AMBER;
-			mode = 3;
-			setTimer2(7000);
 		}
 		if(IsModeButtonPressed(2) == 1){
+			SCH_Init();
 			status = RED1_GREEN2;
-//			setTimer3(250);
+			wait = 0;
+			count = timeRed;
 			UpdateBuffer(mode, count);
-			setTimer1(timeGreen*1000);
-			setTimer2(7000);
+			SCH_Add_Task(LED7, 0, 250);
 		}
 		if(IsModeButtonPressed(0) == 1){
+			SCH_Init();
 			status = INIT;
-			count = 1;
+			count = TIME_RED;
 			mode = 1;
-			UpdateBuffer(mode, TIME_RED);
-			setTimer3(250);
-			setTimer2(7000);
-			setTimer1(500);
+			UpdateBuffer(mode, count);
 		}
 		break;
 	default:
 		break;
 	}
-//	if(timer3_flag == 1){
-//		if(index == 4) index = 0;
-//		setTimer3(250);
-//		Update7SEG(index++);
-//	}
 }
 

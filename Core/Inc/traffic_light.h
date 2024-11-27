@@ -15,8 +15,9 @@ void displayRED2();
 void displayAMBER2();
 void displayGREEN2();
 void BlinkRED();
-void BlinkAMBER();
+void BlinkAMBER();;
 void BlinkGREEN();
+void OFF();
 
 
 #endif /* INC_TRAFFIC_LIGHT_H_ */
