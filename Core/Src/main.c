@@ -114,15 +114,20 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  status = INIT;
 //  SCH_Add_Task(BlinkRED1, 0, 500);
 //  mode = 1;
 //  SCH_Add_Task(ledtest1, 1000, 2000);
 //  SCH_Add_Task(LED7, 0, 250);
+  SCH_Init();
+  status = INIT;
+  SCH_Add_Task(LED7, 1000, 250);
+  SCH_Add_Task(fsm_auto_run, 0, 1000);
+  SCH_Add_Task(fsm_man_run, 0, 1000);
+
   while (1)
   {
-	  fsm_auto_run();
-	  fsm_man_run();
+//	  fsm_auto_run();
+//	  fsm_man_run();
 	  SCH_Dispatch_Tasks();
 
     /* USER CODE END WHILE */

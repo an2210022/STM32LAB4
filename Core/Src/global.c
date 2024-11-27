@@ -18,8 +18,8 @@ int wait1 = 0;
 void LED7(void) {
 	if(index == 4) {
 		index = 0;
-		count--;
-		if(count == 0){
+		--count;
+		if(count < 0){
 			count = timeRed;
 		}
 		UpdateBuffer(mode, count);
